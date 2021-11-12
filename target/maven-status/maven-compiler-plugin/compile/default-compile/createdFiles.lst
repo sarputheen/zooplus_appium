@@ -1,0 +1,5 @@
+com/zooplus/utilities/JSONUtils.class
+com/zooplus/pageObjects/TodoList.class
+com/zooplus/utilities/PropertyUtils.class
+com/zooplus/pageObjects/BasePage.class
+com/zooplus/driverInit/DriverInitialization.class
