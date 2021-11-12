@@ -62,7 +62,7 @@ public class DriverInitialization {
 //		capabilities.setCapability("app", System.getProperty("user.dir")+"/src/main/resources/appfile/app-mock-debug.apk");
 		capabilities.setCapability("appPackage", "com.example.android.architecture.blueprints.master.mock");
 		capabilities.setCapability("appActivity", "com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity");
-		driver = new AppiumDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
+		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		
