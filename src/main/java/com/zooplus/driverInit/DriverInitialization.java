@@ -28,7 +28,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 public class DriverInitialization {
-	public static AndroidDriver driver;
+	public static RemoteWebDriver driver;
 	public static AppiumDriverLocalService service;
 	public static AppiumServiceBuilder builder;
 	static File root = new File(System.getProperty("user.dir"));
@@ -62,39 +62,11 @@ public class DriverInitialization {
 //		capabilities.setCapability("app", System.getProperty("user.dir")+"/src/main/resources/appfile/app-mock-debug.apk");
 		capabilities.setCapability("appPackage", "com.example.android.architecture.blueprints.master.mock");
 		capabilities.setCapability("appActivity", "com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity");
-		driver = new AndroidDriver<MobileElement>(capabilities);
+		driver = new AppiumDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		
-//		builder = new AppiumServiceBuilder();
-////		builder.usingDriverExecutable(new File("/home/ninad/.homebrew/bin/node"));
-//		builder.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"));
 
-	    builder.withIPAddress("127.0.0.1");
-	    builder.usingAnyFreePort();
-	    builder.withEnvironment(environment);
-	    builder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
-	    builder.withArgument(GeneralServerFlag.LOG_LEVEL, "error");
-
-	    // Start the server with the builder
-	    AppiumDriverLocalService service = null;
-	    try {
-	        service = AppiumDriverLocalService.buildService(builder);
-	        service.start();
-	    } catch (NullPointerException e) {
-	        e.printStackTrace();
-	    }
-
-	    String appiumServiceUrl = service.getUrl().toString();
-	    System.out.println("Appium URL " + appiumServiceUrl);
-
-	    try {
-		 unInstallappiumSettings();
-	        driver = new AndroidDriver<MobileElement>(new URL(appiumServiceUrl), capabilities);
-	        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-	    } catch (MalformedURLException e) {
-	        e.printStackTrace();
-	    }
 
 		Base = new BasePage(driver);
 		
