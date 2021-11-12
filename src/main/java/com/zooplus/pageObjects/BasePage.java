@@ -33,11 +33,11 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class BasePage  {
 	
 	
-	public static AndroidDriver driver ;
+	public static RemoteWebDriver driver ;
 	public static String waitstrategy = "Visible";
 	public static WebDriverWait driverWait;
 
-	public BasePage(AndroidDriver driver2) {
+	public BasePage(RemoteWebDriver driver2) {
 		
 		 this.driver = driver2;
 		 driverWait = new WebDriverWait(driver, 15);
