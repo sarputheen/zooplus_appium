@@ -1,0 +1,136 @@
+version: 2.1
+jobs:
+    
+    regression-test:
+        working_directory: ~/zooplus_appium
+        
+        docker:
+            - image: circleci/android:api-30
+            
+            
+        environment:
+          # Customize the JVM maximum heap limit
+            MAVEN_OPTS: -Xmx3200m   
+        
+            
+        steps:
+            - checkout
+            - run:
+               name: get Java and Android home
+               command: |
+                    echo $JAVA_HOME
+                    echo $ANDROID_HOME
+                    cd $ANDROID_HOME
+                    adb --version|head -1
+                    
+                    
+                    
+                    
+            - run:
+                name: Install libs for libpulse
+                command: |
+                        cd;
+                        sudo apt-get update
+                        sudo apt-get install pulseaudio
+            
+            
+            - run:
+                name: List Images
+                command: |
+                    cd;sdkmanager --list --verbose | grep system-images
+            - run:
+                name: Setup Emulator
+                command: cd;sdkmanager --install "system-images;android-29;default;x86_64" && echo
+                    "no" | avdmanager create avd -n test -k "system-images;android-29;default;x86_64"
+            - run:
+                name: Launch Emulator
+                command: |
+                    cd ${ANDROID_HOME}/emulator;ls
+                    export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
+                    emulator -avd test -skin 1080x2220 -no-window -no-boot-anim -no-snapshot-load -no-accel
+                    emulator -avd test -no-window -no-boot-anim -no-snapshot-load -no-accel
+                    adb install settings_apk-debug.apk
+                background: true
+                
+            - run:
+                name: Wait emulator
+                command: |
+                    adb wait-for-device
+                    adb devices
+                    cd;
+                    cd zooplus_appium
+                    ls -ltr
+                    
+
+
+                    
+                    
+                
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ checksum "pom.xml" }}
+                # fallback to using the latest cache if no exact match is found
+                - v1-dependencies-
+
+            - run:
+                name: Install node 
+                command: |
+                       curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+                       sudo apt-get install -y nodejs
+                       sudo apt-get install -y build-essential
+                       sudo apt-get install build-essential curl git m4 python-setuptools ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+                       echo $NODE_PATH
+            - run: node --version
+            - run: npm --version
+            - run:
+               name: Install appium server
+               command: |
+                    sudo npm update -g
+                    sudo npm install grunt-cli
+                    sudo npm install -g appium@1.22.0 --unsafe-perm=true --allow-root
+                    sudo npm install wd --unsafe-perm=true --allow-root
+
+
+
+            - save_cache:
+                    paths:
+                    - ~/.m2
+                    key: v1-dependencies-{{ checksum "pom.xml" }}
+    
+            - run:
+               name: Start appium server
+               command: |
+                    sudo npm i -S io.appium.settings
+                    appium --relaxed-security --allow-insecure --no-perms-check &
+               background: true
+
+            
+            
+            
+            - run:
+                name: Wait Until Appium Boot
+                command: sleep 30
+            
+               
+            
+            - run:
+                name: Install Maven
+                command: |
+                        cd;sudo apt-get install maven
+                        mvn --version
+                        
+                      
+            
+            - run:
+                name: Run Tests
+                command: mvn clean install
+            - store_test_results:
+                path: target/surefire-reports
+            - store_artifacts:
+                path: target/surefire-reports
+                destination: regression-test-results
+workflows:
+    build_and_test:
+        jobs:
+            - regression-test
+                        
