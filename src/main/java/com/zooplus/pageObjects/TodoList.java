@@ -15,7 +15,7 @@ import io.appium.java_client.ios.IOSDriver;
 
 public class TodoList extends BasePage {
 
-	public TodoList(AndroidDriver driver2) {
+	public TodoList(RemoteWebDriver driver2) {
 		super(driver2);
 
 	}
