@@ -41,7 +41,10 @@ Java, Cucumber, Appium, Extent Report
 
 
 ## Note:
-    When I tried to execute the test using cirecle CI, its failing during the driver initialization and I have referred many sites for the soultion but nothing wokred (https://app.circleci.com/pipelines/github/sarputheen/zooplus_appium/6/workflows/36a6d59a-4012-4979-a1d5-dd6f92959a0f/jobs/6)
+ - When I tried to execute the test using cirecle CI, its failing during the driver initialization and I have referred many sites for the soultion but nothing wokred. 
+ 
+  To check test build summary - https://app.circleci.com/pipelines/github/sarputheen/zooplus_appium  
+  To check rest run build detail -  https://app.circleci.com/pipelines/github/sarputheen/zooplus_appium/6/workflows/36a6d59a-4012-4979-a1d5-dd6f92959a0f/jobs/6
     
  
 ## Next step of Framework Implementation
