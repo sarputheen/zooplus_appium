@@ -6,7 +6,10 @@ Mobile Application Auotomation
 Java, Cucumber, Appium, Extent Report
 
 ## Approach 
-- I have used the Page Object Model design pattern for this framework design. So that we can add new or remove old features if required. 
+Project - Maven Project
+Design pattern - Page object model
+Framework - Cucumber(For Test approach), Appium Driver(For Mobile UI Automation), Cucumber(For Test Execution ), Extent(For Report)
+Language - Java 
 
 ## Project Setup 
 - Driver capabilities -  /src/main/java/com/zooplus/driverInit/
@@ -23,10 +26,12 @@ Java, Cucumber, Appium, Extent Report
     Android Studio (Emulator should be running already)
     Appium (Should be running already)
     Java 8 and above 
+    Install Maven and set the Environment Variable
     Any IDE
+    
    
 ## Steps for Local Execution
-- Download and Extract this project to your local 
+- Download and Extract this project to your local or use git clone https://github.com/sarputheen/zooplus_appium_task.git 
 - Import as a Maven project in IDE ( Prefered - Eclipse)
 - Open the pom.xml in the project
 - Right Click inside the pom.xml content
