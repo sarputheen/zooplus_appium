@@ -30,8 +30,8 @@ jobs:
                 name: Install libs for libpulse
                 command: |
                         cd;
-                        sudo apt-get update
-                        sudo apt-get install pulseaudio
+                         apt-get update
+                         apt-get install pulseaudio
             
             
             - run:
@@ -75,10 +75,10 @@ jobs:
             - run:
                 name: Install node 
                 command: |
-                       curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-                       sudo apt-get install -y nodejs
-                       sudo apt-get install -y build-essential
-                       sudo apt-get install build-essential curl git m4 python-setuptools ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+                       curl -sL https://deb.nodesource.com/setup_12.x | bash -
+                       apt-get install -y nodejs
+                       apt-get install -y build-essential
+                       apt-get install build-essential curl git m4 python-setuptools ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
                        echo $NODE_PATH
             - run: node --version
             - run: npm --version
@@ -116,7 +116,7 @@ jobs:
             - run:
                 name: Install Maven
                 command: |
-                        cd;sudo apt-get install maven
+                        cd; apt-get install maven
                         mvn --version
                         
                       
