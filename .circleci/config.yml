@@ -30,8 +30,8 @@ jobs:
                 name: Install libs for libpulse
                 command: |
                         cd;
-                         apt-get update && echo
-                    "Y" | apt-get install pulseaudio
+                         apt-get update  
+                         apt-get install -y pulseaudio
             
             
             - run:
