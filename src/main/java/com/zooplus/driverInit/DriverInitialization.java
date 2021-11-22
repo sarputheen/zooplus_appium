@@ -31,7 +31,7 @@ public class DriverInitialization {
 		capabilities.setCapability("appPackage", "com.example.android.architecture.blueprints.master.mock");
 		capabilities.setCapability("appActivity",
 				"com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity");
-		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		driver = new AndroidDriver(capabilities);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		Base = new BasePage(driver);
 
