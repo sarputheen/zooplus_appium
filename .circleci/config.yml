@@ -5,7 +5,7 @@ jobs:
         working_directory: ~/zooplus_appium
         
         docker:
-            - image: circleci/android:api-30
+            - image: androidsdk/android-30
             
             
         environment:
