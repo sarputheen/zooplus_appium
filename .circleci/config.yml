@@ -30,8 +30,8 @@ jobs:
                 name: Install libs for libpulse
                 command: |
                         cd;
-                         apt-get update
-                         apt-get install pulseaudio
+                         apt-get update && echo
+                    "Y" | apt-get install pulseaudio
             
             
             - run:
@@ -85,10 +85,10 @@ jobs:
             - run:
                name: Install appium server
                command: |
-                    sudo npm update -g
-                    sudo npm install grunt-cli
-                    sudo npm install -g appium@1.22.0 --unsafe-perm=true --allow-root
-                    sudo npm install wd --unsafe-perm=true --allow-root
+                     npm update -g
+                     npm install grunt-cli
+                     npm install -g appium@1.22.0 --unsafe-perm=true --allow-root
+                     npm install wd --unsafe-perm=true --allow-root
 
 
 
@@ -100,7 +100,6 @@ jobs:
             - run:
                name: Start appium server
                command: |
-                    sudo npm i -S io.appium.settings
                     appium --relaxed-security --allow-insecure --no-perms-check &
                background: true
 
